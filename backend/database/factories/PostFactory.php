@@ -17,9 +17,11 @@ class PostFactory extends Factory
      */
     public function definition(){
         $title = $this->faker->sentence;
+        $description = $this->faker->sentence;
         return [
             'user_id' => User::factory(),
             'title' => $title,
+            'description' => $description,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraphs(3, true),
             'image' => null,
