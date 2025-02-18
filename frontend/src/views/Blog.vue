@@ -18,14 +18,13 @@ getBlogs()
             Blogs
         </h2>
         <div class="flex flex-col gap-8">
-            <div v-motion :initial="initialValue" :visibleOnce="visibleOnceValue" v-for="blog in blogs.data" class="flex flex-col-reverse tablet:flex-row items-start justify-between h-[20vh] min-h-[20vh] cursor-pointer">
+            <div v-motion :initial="initialValue" :visibleOnce="visibleOnceValue" v-for="blog in blogs.data"
+                class="flex flex-col-reverse tablet:flex-row items-start justify-between h-[20vh] min-h-[20vh] cursor-pointer">
                 <div class="flex flex-col  flex-1 justify-between gap-1 h-full">
                     <div class="flex flex-col gap-2">
                         <h2 class="font-semibold text-lg">{{ blog.title }}</h2>
                         <p class="pr-16">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet maiores earum ipsam obcaecati
-                            modi! Sit maxime impedit laborum aut possimus magni ea nostrum, pariatur sequi modi, molestias
-                            unde dolor ut.
+                            {{ blog.description }}
                         </p>
                     </div>
                     <span class="text-[#aaaaaa]">{{ formatDate(blog.created_at) }}</span>

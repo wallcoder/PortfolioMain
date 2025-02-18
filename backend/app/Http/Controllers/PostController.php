@@ -13,7 +13,7 @@ class PostController extends Controller
     public function index()
     {
         
-       $posts = Post::paginate(10);
+        $posts = Post::select('title','description', 'created_at')->paginate(10);
        
        return response()->json($posts);
     }
