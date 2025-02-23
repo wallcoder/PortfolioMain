@@ -25,6 +25,10 @@ export default {
         'bg-lm': '#FAFAFA',
         'bg-dm': '#121212',
 
+
+        'admin-bg': '#F2F2F2',
+        'admin-sb-bg': '#FFFFFF',
+
         'p-lm': '#000000',
         'p-dm': '#FAFAFA',
 

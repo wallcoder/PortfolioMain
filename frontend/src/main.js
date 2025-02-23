@@ -7,6 +7,7 @@ import Particles from 'vue3-particles';
 import { createNotivue } from 'notivue'
 import App from './App.vue'
 import router from './router'
+
 import 'notivue/notification.css' // Only needed if using built-in notifications
 import 'notivue/animations.css' // Only needed if using built-in animations
 const api = import.meta.env.VITE_API
@@ -18,10 +19,23 @@ const notivue = createNotivue({
   avoidDuplicates: true,
   notifications: {
     global: {
-      duration: 10000
+      duration: 5000
     }
   }
 })
+
+window.addEventListener('storage', (event) => {
+  if (event.key === 'token') {
+    if (!event.newValue) {
+      // 🔹 Token was removed (user logged out in another tab)
+      window.location.href = '/login';
+    } else if (event.oldValue && event.newValue !== event.oldValue) {
+      // 🔹 Token changed (user logged in on another tab)
+      window.location.href = '/login';
+    }
+  }
+});
+
 axios.defaults.baseURL = api; // Laravel API URL
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";

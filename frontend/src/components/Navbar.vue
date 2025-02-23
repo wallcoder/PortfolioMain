@@ -35,7 +35,7 @@ const handleScroll = () => {
     if (scrollTimeout) clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
         isNavbarVisible.value = true;
-    }, 5000);
+    }, 180000);
 };
 
 onMounted(() => {
@@ -62,8 +62,8 @@ onUnmounted(() => {
             <nav class="flex text-sm items-center gap-12">
                 <div class="hidden tablet:flex items-center gap-12 ">
                     <RouterLink to="/blogs">Blogs</RouterLink>
-                    <RouterLink to="#works">Projects</RouterLink>
-                    <RouterLink to="#about">About</RouterLink>
+                    <RouterLink to="/#works">Projects</RouterLink>
+                    <RouterLink to="/#about">About</RouterLink>
                     <ButtonExt :link="`mailto:${email}`" content="Connect" />
                 </div>
 
@@ -108,9 +108,10 @@ onUnmounted(() => {
                         :class="isDark ? 'text-a-dm' : ''"></i>
                 </div>
                 <div class="flex flex-col pt-5">
-                    <RouterLink to="#works" class="py-4 w-full" @click="isOpen = false">Projects</RouterLink>
-                    <RouterLink to="#about" class="py-4 w-full" @click="isOpen = false">About</RouterLink>
-                    <RouterLink to="" class="py-4 w-full" @click="isOpen = false">Connect</RouterLink>
+                    <RouterLink to="/blogs" class="py-4 w-full" @click="isOpen = false">Blogs</RouterLink>
+                    <RouterLink to="/#works" class="py-4 w-full" @click="isOpen = false">Projects</RouterLink>
+                    <RouterLink to="/#about" class="py-4 w-full" @click="isOpen = false">About</RouterLink>
+                    <RouterLink :link="`mailto:${email}`" class="py-4 w-full" @click="isOpen = false">Connect</RouterLink>
                 </div>
             </div>
 

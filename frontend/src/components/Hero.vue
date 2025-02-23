@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme';
 import Button from '@/components/Button.vue'
 import ButtonExt from '@/components/ButtonExt.vue'
+import Loader from '@/components/Loader.vue'
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 const { toggleDark } = theme;
@@ -21,6 +22,7 @@ const github = import.meta.env.VITE_GH
 <template>
     <section v-motion-fade-visible-once
         class="min-h-[80vh]  flex justify-center smartphone-landscape:items-center mt-40 smartphone-landscape:mt-0 ">
+        
         <div
             class="flex-col flex smartphone-landscape:flex-row items-center  relative w-full smartphone-landscape:justify-center ">
             <div class="flex flex-col gap-1 z-[2]">
