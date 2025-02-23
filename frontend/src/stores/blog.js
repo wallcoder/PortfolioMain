@@ -5,7 +5,7 @@ import { useLoaderStore } from "@/stores/loader"
 import { Notivue, Notification, push } from 'notivue';
 import { useRouter } from 'vue-router'
 export const useBlogStore = defineStore('blog', () => {
-    const { isLoading } = storeToRefs(useLoaderStore())
+    const { isLoading, isError } = storeToRefs(useLoaderStore())
     const blogs = ref([]);
     const blog = ref({});
     const otherBlogs = ref([]);
@@ -33,6 +33,9 @@ export const useBlogStore = defineStore('blog', () => {
 
 
         } catch (error) {
+
+
+            isError.value = true
             console.log(error);
 
         } finally {
@@ -70,6 +73,7 @@ export const useBlogStore = defineStore('blog', () => {
 
 
             } catch (error) {
+                isError.value = true
                 console.log(error);
 
             } finally {
@@ -172,6 +176,10 @@ export const useBlogStore = defineStore('blog', () => {
 
     const handleSubmit = async (statusValue = 'published') => {
         blogDetails.value.status = statusValue;
+        if (!blogDetails.value.content || !blogDetails.value.image || !blogDetails.value.title || !blogDetails.value.description) {
+            push.warning("Fill all forms");
+            return;
+        }
         const formData = new FormData();
         formData.append('status', blogDetails.value.status);
         formData.append('title', blogDetails.value.title);
@@ -248,7 +256,7 @@ export const useBlogStore = defineStore('blog', () => {
 
             const response = await axios.put(`/posts/${id}/update`, formData);
             console.log("response: ", response.data);
-            
+
             router.push('/admin/blogs');
             push.success(response.data.message);
         } catch (err) {
@@ -272,6 +280,7 @@ export const useBlogStore = defineStore('blog', () => {
             blog.value = response.data;
 
         } catch (error) {
+            isError.value = true
             console.log(error)
 
         } finally {
@@ -303,6 +312,7 @@ export const useBlogStore = defineStore('blog', () => {
 
 
         } catch (error) {
+            isError.value = true
             console.log(error)
 
         } finally {

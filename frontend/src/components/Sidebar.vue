@@ -30,7 +30,7 @@ if (storedToken) {
                
 
             </div>
-            <div class="glowing-circle top-11 right-1"></div>
+            <div class="glowing-circle top-11 right-2"></div>
         </div>
         <nav
             class="text-[#575757] flex flex-col py-4 gap-1  w-full  border-t-[#BE77E0] border-t-solid border-t-4 border-b-4 border-b-[#BE77E0] ">
