@@ -9,6 +9,7 @@ import AdminBlogs from '@/views/AdminBlogs.vue'
 import AdminCreateBlog from '@/views/AdminCreateBlog.vue'
 import AdminEditBlog from '@/views/AdminBlogEdit.vue'
 import Login from '@/views/Login.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,7 +72,9 @@ const router = createRouter({
       name: 'login',
       component: Login,
 
-    }
+    },
+    { path: "/:pathMatch(.*)*", component: NotFound }, // Catch-all 404 route
+
 
   ],
   scrollBehavior(to, from, savedPosition) {

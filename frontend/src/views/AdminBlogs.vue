@@ -49,7 +49,7 @@ const visiblePages = computed(() => {
                 class=" p-2 px-4 bg-[#b67dd1] hover:bg-[#c386df] font-semibold text-white rounded-lg uppercase">Search</button>
 
         </div>
-        <table class="w-full  border-collapse overflow-y-auto bg-white ">
+        <table class="w-full  border-collapse overflow-y-auto bg-white " v-if="blogsAll.data.length > 0">
             <thead class="uppercase text-left text-sm text-gray-800">
                 <tr>
 
@@ -82,6 +82,9 @@ const visiblePages = computed(() => {
 
             </tbody>
         </table>
+        <div v-else class="text-xl w-full flex items-center justify-center h-40 text-gray-500 ">
+            <h2 >Sorry, No blogs Available</h2>
+        </div>
         <div class="w-full flex items-center justify-center" v-motion-fade-visible-once v-if="blogsAll.links?.length > 0">
                 <div class="flex gap-2"  v-if="blogsAll.last_page != 1">
                     

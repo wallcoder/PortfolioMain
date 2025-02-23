@@ -7,11 +7,12 @@ const { email, password, error, router } = storeToRefs(auth);
 const { login } = auth;
 </script>
 <template>
-    <section class="w-full h-[100vh] flex items-center justify-center bg-white text-black">
-        <div class="login-card">
+    <section class="w-full h-[100vh] flex items-center justify-center  text-black relative">
+        <img src="../assets/wall.webp" alt="" class="absolute w-full h-full">
+        <div class="login-card bg-[rgba(255,255,255,0.8)] z-10 ">
             <div class="brand">
-                <h1>Welcome back</h1>
-                <div  class="text-sm text-red-600 p-2">{{ error }}</div>
+                <h1>Welcome Back</h1>
+                <div class="text-sm text-red-600 p-2" v-if="error">{{ error }}</div>
             </div>
 
             <form id="loginForm" @submit.prevent="login">
@@ -19,7 +20,7 @@ const { login } = auth;
                     <label for="email">Email</label>
                     <input required v-model="email" type="email" id="email" placeholder="name@company.com"
                         autocomplete="email">
-                    
+
                 </div>
 
                 <div class="form-group">
@@ -38,8 +39,8 @@ const { login } = auth;
 
 <style setup>
 .login-card {
-    background: white;
-    border-radius: 20px;
+    
+    border-radius: 4px;
     padding: 3rem 2rem;
     width: 100%;
     max-width: 420px;
@@ -60,9 +61,9 @@ const { login } = auth;
 }
 
 .brand h1 {
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     color: #1a1a1a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .brand p {
@@ -87,7 +88,7 @@ const { login } = auth;
     width: 100%;
     padding: 0.8rem 1rem;
     border: 2px solid #e1e1e1;
-    border-radius: 12px;
+    border-radius: 4px;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
