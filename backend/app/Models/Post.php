@@ -18,12 +18,12 @@ class Post extends Model
         'status',
     ];
 
-    public function scopePublished($query){
-        return $query->where('status','published');
-    }
+    // public function scopePublished($query){
+    //     return $query->where('status','published');
+    // }
 
-    public function getImageUrlAttribute()
-    {
-        return $this->image ? asset('storage/' . $this->image) : null;
-    }
+    // public function getImageUrlAttribute()
+    // {
+    //     return $this->image ? asset('storage/' . $this->image) : null;
+    // }
 }

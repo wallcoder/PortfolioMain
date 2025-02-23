@@ -12,10 +12,10 @@ export const useAnimationStore = defineStore('animation', () => {
 
     })
 
-    const initialValue = ref({ opacity: 0, y: 200, transition: { duration: 900, ease: 'easeOut' } });
+    const initialValue = ref({ opacity: 0, y: 50, transition: { duration: 900, ease: 'easeOut' } });
     const visibleOnceValue = ref({ opacity: 1, y: 0, transition: { duration: 900, ease: 'easeOut' } })
 
-    const initialValueImg = ref({ opacity: 0, y: 50, transition: { duration: 600, ease: 'easeIn' } });
+    const initialValueImg = ref({ opacity: 0, y: 30, transition: { duration: 600, ease: 'easeIn' } });
     const visibleOnceValueImg = ref({ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeIn' } })
 
     return { targetEl, initialValue, initialValueImg, visibleOnceValue, visibleOnceValueImg }
