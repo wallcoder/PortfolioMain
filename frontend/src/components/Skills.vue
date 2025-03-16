@@ -23,19 +23,104 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
 <template>
     <section class="flex flex-col gap-5 pb-20" v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
-        <h2 class="text-2xl" v-motion-fade-visible-once>Skills</h2>
-        <section v-motion-fade-visible-once class="rounded-lg w-full min-h-32 flex gap-6 items-center p-4 justify-center flex-wrap"
-            :class="isDark ? 'bg-s-dm' : 'bg-s-lm'">
-            <img src="../assets/C++.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/JavaScript.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/Vue.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/Node.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/Express.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/Tailwind.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/MySQL.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
-            <img src="../assets/PostgreSQL.png" alt="" class="w-[70px] h-[70px]" v-motion :initial="initialValueImg" :visibleOnce="visibleOnceValueImg">
+        <h2 class="text-2xl font-semibold " v-motion-fade-visible-once>Skills</h2>
 
-        </section>
+        <div class="flex gap-3 flex-wrap">
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/vue.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Vue.js
+                </span>
+
+            </span>
+            <span v-if="!isDark"
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/express1.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Express.js
+                </span>
+
+            </span>
+            <span v-else
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/express2.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Express.js
+                </span>
+
+            </span>
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/tailwind.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Tailwind
+                </span>
+
+            </span>
+
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/js.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    JavaScript
+                </span>
+
+            </span>
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-16" src="@/assets/cplusplus.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    C++
+                </span>
+
+            </span>
+
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/laravel.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Laravel
+                </span>
+
+            </span>
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/mysql.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    MySQL
+                </span>
+
+            </span>
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/postgre.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    PostgreSQL
+                </span>
+
+            </span>
+            <span
+                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                <img class="w-10" src="@/assets/nodejs.svg" alt="">
+                <span
+                    class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Node.js
+                </span>
+
+            </span>
+
+
+        </div>
     </section>
 </template>
 

@@ -27,7 +27,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <RouterLink to=""  class="flex items-center gap-1  py-2 px-3 rounded-lg shadow-[] connect-btn text-center  transition-all duration-200   dark:text-a-dm dark:hover:text-bg-lm dark:hover:border-bg-lm dark:hover:bg-none" :class="[isDark ? 'connect-btn-dm ': 'connect-btn-lm bg-bg-lm hover:bg-[#e7e7e7]', props.extraStyle ? props.extraStyle : '' ]">
+    <RouterLink to="#"  class="flex items-center gap-1  py-2 px-3 rounded-lg shadow-[] connect-btn text-center  transition-all duration-200   dark:text-a-dm dark:hover:text-bg-lm dark:hover:border-bg-lm dark:hover:bg-none" :class="[isDark ? 'connect-btn-dm ': 'connect-btn-lm bg-bg-lm hover:bg-[#e7e7e7]', props.extraStyle ? props.extraStyle : '' ]">
        <i :class="props.iconStyle" class="" v-if="props.iconStyle"></i> {{ props.content }}</RouterLink>
 </template>
 

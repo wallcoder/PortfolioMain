@@ -2,8 +2,11 @@
 import { useAuthStore } from '@/stores/auth';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { useLoaderStore } from '@/stores/loader';
 const auth = useAuthStore();
+const { isLoading, isError } = storeToRefs(useLoaderStore())
 const { email, password, error, router } = storeToRefs(auth);
+import SpinnerLoader from '@/components/SpinnerLoader.vue';
 const { login } = auth;
 </script>
 <template>
@@ -29,8 +32,10 @@ const { login } = auth;
                         autocomplete="current-password">
                 </div>
 
-                <button type="submit" class="login-btn" id="loginButton">
-                    Sign in
+                <button type="submit" class="login-btn" id="loginButton" :disabled="isLoading">
+                    <span v-if="isLoading" >Logging in...</span>
+                    <span v-else>Sign In</span>
+                    
                 </button>
             </form>
         </div>
@@ -39,7 +44,7 @@ const { login } = auth;
 
 <style setup>
 .login-card {
-    
+
     border-radius: 4px;
     padding: 3rem 2rem;
     width: 100%;
@@ -145,7 +150,7 @@ const { login } = auth;
 
 .login-btn:hover {
     background: #333;
-    transform: translateY(-2px);
+    
 }
 
 .login-btn:active {

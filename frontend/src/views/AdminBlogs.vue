@@ -1,20 +1,23 @@
 <script setup>
 
 import { ref, onMounted, watch, computed } from 'vue'
-import {RouterLink} from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useBlogStore } from '@/stores/blog'
+import { useLoaderStore } from "@/stores/loader"
+import SpinnerLoader from "@/components/SpinnerLoader.vue";
 const blogStore = useBlogStore()
 const { blogsAll, searchTerm } = storeToRefs(blogStore)
 const { getBlogsAll, formatDate2, delBlog } = blogStore
+const { isLoading, isError, isLoadingSpinner } = storeToRefs(useLoaderStore())
 
 
 onMounted(() => {
     getBlogsAll()
 })
 
-watch(searchTerm, ()=>{
-    if(!searchTerm.value){
+watch(searchTerm, () => {
+    if (!searchTerm.value) {
         getBlogsAll(undefined, true);
     }
 })
@@ -42,77 +45,89 @@ const visiblePages = computed(() => {
 <template>
     <section class="p-8 flex flex-col w-full min-h-[100vh] gap-2 " v-motion-fade-visible-once>
         <h2 class="uppercase font-semibold text-xl">BLOG POSTS</h2>
-        <div class="flex gap-2 py-2">
-            <input @keydown.enter="getBlogsAll()" type="text" name="" id="" placeholder="Search Post" class="p-2 outline-none" v-model="searchTerm">
-            
-            <button type="button" @click="getBlogsAll()"
-                class=" p-2 px-4 bg-[#b67dd1] hover:bg-[#c386df] font-semibold text-white rounded-lg uppercase">Search</button>
+        
+        <div v-if="isError || isLoadingSpinner">
+            <div v-if="isLoadingSpinner" class="w-full flex items-center justify-center h-[40vh]">
+                <SpinnerLoader />
+            </div>
+            <div v-if="isError" class="w-full flex items-center justify-center text-base">
+                <h2>Network Error! Try refreshing the page.</h2>
 
+            </div>
         </div>
-        <table class="w-full  border-collapse overflow-y-auto bg-white " v-if="blogsAll.data.length > 0">
-            <thead class="uppercase text-left text-sm text-gray-800">
-                <tr>
+        <div v-else>
+            <div class="flex gap-2 py-2">
+                <input @keydown.enter="getBlogsAll()" type="text" name="" id="" placeholder="Search Post"
+                    class="p-2 outline-none" v-model="searchTerm">
 
-                    <th class=" px-4 py-2">TITLE</th>
-                    <th class=" px-4 py-2">description</th>
-                    <th class=" px-4 py-2">status</th>
-                    <th class=" px-4 py-2">created at</th>
-                    <th class=" px-4 py-2">modified at</th>
-                    <th></th>
-                    <th class=""></th>
-                    <th class=""></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="" v-for="blog in blogsAll.data" :id="blog.id" v-motion-fade-visible-once>
-                    <td class=" px-4 py-2 w-[200px] h-20"><span>{{ blog.title }}</span></td>
-                    <td class=" px-4 py-2 max-w-[400px]  h-20">{{ blog.description }} </td>
-                    <td class=" px-4 py-2  h-20"><span class="uppercase  p-2 rounded-lg cursor-pointer"
-                            :class="blog.status == 'published' ? 'bg-[#BFE4C3] text-[#1e5a24]' : 'bg-[#e4cdbf] text-[#774d2a]'">{{
-                                blog.status }}</span>
-                    </td>
-                    <td class=" px-4 py-2 h-20">{{ formatDate2(blog.created_at) }}</td>
-                    <td class=" px-4 py-2 h-20">{{ formatDate2(blog.updated_at) }}</td>
+                <button type="button" @click="getBlogsAll()"
+                    class=" p-2 px-4 bg-[#b67dd1] hover:bg-[#c386df] font-semibold text-white rounded-lg uppercase">Search</button>
 
-                    <td class="px-4 py-2 h-20"><i class="fa-solid fa-delete-left cursor-pointer" @click="delBlog(blog.id)"></i></td>
-                    <td class="px-4 py-2 h-20"><RouterLink :to="`/admin/blog/${blog.id}/edit`" class="fa-solid fa-pen-to-square cursor-pointer" ></RouterLink></td>
-                </tr>
+            </div>
+            <table class="w-full  border-collapse overflow-y-auto bg-white " v-if="blogsAll.data?.length > 0">
+                <thead class="uppercase text-left text-sm text-gray-800">
+                    <tr>
+
+                        <th class=" px-4 py-2">TITLE</th>
+                        <th class=" px-4 py-2">description</th>
+                        <th class=" px-4 py-2">status</th>
+                        <th class=" px-4 py-2">created at</th>
+                        <th class=" px-4 py-2">modified at</th>
+                        <th></th>
+                        <th class=""></th>
+                        <th class=""></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="" v-for="blog in blogsAll.data" :id="blog.id" v-motion-fade-visible-once>
+                        <td class=" px-4 py-2 w-[200px] h-20"><span>{{ blog.title }}</span></td>
+                        <td class=" px-4 py-2 max-w-[400px]  h-20">{{ blog.description }} </td>
+                        <td class=" px-4 py-2  h-20"><span class="uppercase  p-2 rounded-lg cursor-pointer"
+                                :class="blog.status == 'published' ? 'bg-[#BFE4C3] text-[#1e5a24]' : 'bg-[#e4cdbf] text-[#774d2a]'">{{
+                                    blog.status }}</span>
+                        </td>
+                        <td class=" px-4 py-2 h-20">{{ formatDate2(blog.created_at) }}</td>
+                        <td class=" px-4 py-2 h-20">{{ formatDate2(blog.updated_at) }}</td>
+
+                        <td class="px-4 py-2 h-20"><i class="fa-solid fa-delete-left cursor-pointer"
+                                @click="delBlog(blog.id)"></i></td>
+                        <td class="px-4 py-2 h-20">
+                            <RouterLink :to="`/admin/blog/${blog.id}/edit`"
+                                class="fa-solid fa-pen-to-square cursor-pointer"></RouterLink>
+                        </td>
+                    </tr>
 
 
 
-            </tbody>
-        </table>
-        <div v-else class="text-xl w-full flex items-center justify-center h-40 text-gray-500 ">
-            <h2 >Sorry, No blogs Available</h2>
+                </tbody>
+            </table>
+            <div v-else class="text-xl w-full flex items-center justify-center h-40 text-gray-500 ">
+                <h2>Sorry, No blogs Available</h2>
+            </div>
         </div>
         <div class="w-full flex items-center justify-center" v-motion-fade-visible-once v-if="blogsAll.links?.length > 0">
-                <div class="flex gap-2"  v-if="blogsAll.last_page != 1">
-                    
-                    <!-- Previous Page Button -->
-                    <button v-if="blogsAll.current_page > 1" 
-                        @click="getBlogsAll(blogsAll.current_page - 1)" 
-                        aria-label="Previous Page">
-                        &laquo;
-                    </button>
+            <div class="flex gap-2" v-if="blogsAll.last_page != 1">
 
-                    <!-- Page Numbers -->
-                    <button  v-for="(page, index) in visiblePages" 
-                        :key="index" 
-                        @click="getBlogsAll(page)" 
-                        :class="page === blogsAll.current_page ? 'font-semibold text-a-dm' : ''"
-                        :disabled="page === '...'">
-                        {{ page }}
-                    </button>
+                <!-- Previous Page Button -->
+                <button v-if="blogsAll.current_page > 1" @click="getBlogsAll(blogsAll.current_page - 1)"
+                    aria-label="Previous Page">
+                    &laquo;
+                </button>
 
-                    <!-- Next Page Button -->
-                    <button v-if="blogsAll.current_page < blogsAll.last_page" 
-                        @click="getBlogsAll(blogsAll.current_page + 1)" 
-                        aria-label="Next Page">
-                        &raquo;
-                    </button>
+                <!-- Page Numbers -->
+                <button v-for="(page, index) in visiblePages" :key="index" @click="getBlogsAll(page)"
+                    :class="page === blogsAll.current_page ? 'font-semibold text-a-dm' : ''" :disabled="page === '...'">
+                    {{ page }}
+                </button>
 
-                </div>
+                <!-- Next Page Button -->
+                <button v-if="blogsAll.current_page < blogsAll.last_page" @click="getBlogsAll(blogsAll.current_page + 1)"
+                    aria-label="Next Page">
+                    &raquo;
+                </button>
+
             </div>
+        </div>
     </section>
 </template>
 <style scoped>

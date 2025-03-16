@@ -7,9 +7,9 @@ const {blogsAll } = storeToRefs(blogStore)
 const {getBlogsAll} = blogStore
 
 
-onMounted(()=>{
-    getBlogsAll()
-})
+// onMounted(()=>{
+//     getBlogsAll()
+// })
 </script>
 <template>
 

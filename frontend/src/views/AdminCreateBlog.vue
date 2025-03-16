@@ -54,21 +54,22 @@ onMounted(() => {
                         class=" p-2 px-4 bg-[#b67dd1] hover:bg-[#c386df] font-semibold text-white rounded-lg uppercase">Draft</button>
                 </div>
             </div>
-            <div class="flex gap-2 " :class="isOpenDetails ? '' : 'hidden'">
+            <div class="flex gap-2 flex-col " :class="isOpenDetails ? '' : 'hidden'">
                 <div class="flex flex-col">
                     <label for="title">Title</label>
-                    <input v-model="blogDetails.title" required type="text" name="" id="title" class="p-2 outline-none"
+                    <input v-model="blogDetails.title" required type="text" name="" id="title" class="p-2 outline-none w-[30%]"
                         placeholder="Give a Title">
                     <label for="title">Image</label>
-                    <input required type="file" @change="handleImage" name="" id="title" class="p-2 outline-none"
+                    <input required type="file" @change="handleImage" name="" id="title" class="p-2 outline-none w-[30%]"
                         placeholder="Give a Title">
 
                 </div>
                 <div class="flex flex-col">
                     <label for="title">Description</label>
                     <textarea v-model="blogDetails.description" required name="" id="" cols="60" rows="5"
-                        placeholder="Write description.." class="p-2 outline-none"></textarea>
+                        placeholder="Write description.." class="p-2 outline-none w-[30%]"></textarea>
                 </div>
+                <img v-if="blogDetails.imageUrl" class="w-full h-[70vh] object-cover my-2" :src="blogDetails.imageUrl" alt="">
 
             </div>
             <h3 class="mt-4">Blog Content </h3>

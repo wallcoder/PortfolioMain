@@ -15,10 +15,11 @@ export default {
         'smartphone-lg': '425px',
         'smartphone-landscape': '480px',
         'smartphone-xl': '600px',
+       
         'tablet': '768px',
         'tablet-large': '900px',
         'laptop': '1024px',
-        'desktop': '992px'
+        'desktop': '1280px'
       },
 
       colors: {

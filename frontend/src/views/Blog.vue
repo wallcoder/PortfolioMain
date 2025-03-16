@@ -55,7 +55,7 @@ const visiblePages = computed(() => {
 
         <!-- Loading State -->
         <div v-if="isLoading || isError">
-            <div class="w-full flex items-center justify-center h-[70vh]" v-if="isLoading">
+            <div class="w-full flex items-center justify-center h-[50vh]" v-if="isLoading">
                 <Loader />
             </div>
             <div v-if="isError" class="w-full ">

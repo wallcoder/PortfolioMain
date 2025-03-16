@@ -4,12 +4,14 @@ import Quill from 'quill';
 import { storeToRefs } from 'pinia';
 import 'quill/dist/quill.snow.css';
 import { useBlogStore } from '@/stores/blog';
+import SpinnerLoader from "@/components/SpinnerLoader.vue";
+import { useLoaderStore } from "@/stores/loader"
 
 const api = import.meta.env.VITE_STORAGE;
 const blogStore = useBlogStore();
 const { handleImage, handleSubmit, getBlogById, updateBlog, handleImageEdit } = blogStore;
 const { editBlogDetails, blogEdit } = storeToRefs(blogStore);
-
+const { isLoading, isError, isLoadingSpinner } = storeToRefs(useLoaderStore())
 const quillInstance = ref(null);
 const editorContainer = ref(null);
 const isOpenDetails = ref(false);
@@ -64,7 +66,16 @@ onMounted(async () => {
         <h2 class="uppercase font-semibold text-xl">Edit Blog</h2>
         <!-- {{ editBlogDetails }}
         {{ blogEdit }} -->
-        <form action="" @submit.prevent="updateBlog(parseInt(props.id))">
+        <div v-if="isError || isLoadingSpinner">
+            <div v-if="isLoadingSpinner" class="w-full flex items-center justify-center h-[40vh]">
+                <SpinnerLoader />
+            </div>
+            <div v-if="isError" class="w-full flex items-center justify-center text-base">
+                <h2>Network Error! Try refreshing the page.</h2>
+
+            </div>
+        </div>
+        <form action="" @submit.prevent="updateBlog(parseInt(props.id))" v-else>
             <div class="flex justify-between items-center gap-2">
                 <div class="flex items-center gap-2">
                     <h3 @click="toggleDetails()" class="cursor-pointer">Blog Details</h3>
@@ -84,7 +95,7 @@ onMounted(async () => {
                     <input v-model="editBlogDetails.title" required type="text" id="title"
                         class=" w-[400px] p-2 outline-none" placeholder="Give a Title">
                     <label for="status">Status</label>
-                    <select name="" id="status" class="w-40" v-model="editBlogDetails.status">
+                    <select  name="" id="status" class="w-40 p-2" v-model="editBlogDetails.status">
                         <option value="published">Published</option>
                         <option value="draft">Draft</option>
                     </select>

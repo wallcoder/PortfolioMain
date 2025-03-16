@@ -1,11 +1,12 @@
 import { defineStore, storeToRefs } from "pinia";
 import axios from "axios";
 import { ref } from "vue";
+
 import { useLoaderStore } from "@/stores/loader"
 import { Notivue, Notification, push } from 'notivue';
 import { useRouter } from 'vue-router'
 export const useBlogStore = defineStore('blog', () => {
-    const { isLoading, isError } = storeToRefs(useLoaderStore())
+    const { isLoading, isError, isLoadingSpinner } = storeToRefs(useLoaderStore())
     const blogs = ref([]);
     const blog = ref({});
     const otherBlogs = ref([]);
@@ -17,13 +18,13 @@ export const useBlogStore = defineStore('blog', () => {
 
     const getBlogs = async (page = 1) => {
         if (blogs.value?.data?.length > 0 && blogs.value?.current_page === page) {
-            console.log("page: ", page)
+            isError.value = false
             return
         }
 
         try {
-            console.log("page: ", page)
 
+            isError.value = false
             console.log("blog before fetch: ", blogs.value.data);
             isLoading.value = true;
             const response = await axios.get(`/posts?page=${page}`);
@@ -59,13 +60,47 @@ export const useBlogStore = defineStore('blog', () => {
 
     }
 
-    const getBlogsAll = async (page = 1, force = 'false') => {
+    const getBlogsAll = async (page = 1, force = false) => {
         if (force) {
             try {
+                isError.value = false
+                isLoadingSpinner.value = true
+
+
+
+
+
+                const response = await axios.get(`/posts/all?page=${page}&search=${searchTerm.value}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                blogsAll.value = response.data;
+                console.log("blogs all: ", response);
+
+
+            } catch (error) {
+                isError.value = true
+                console.log(error);
+
+            } finally {
+                isLoadingSpinner.value = false
+            }
+
+        } else {
+            if (blogsAll.value?.data?.length > 0 && blogsAll.value?.current_page === page && !searchTerm.value) {
+                isError.value = false
+                console.log("not refreshed")
+                return
+            }
+
+            try {
+                isError.value = false
                 console.log("page: ", page)
 
                 console.log("blog before fetch: ", blogs.value.data);
-                isLoading.value = true;
+                isLoadingSpinner.value = true;
                 const response = await axios.get(`/posts/all?page=${page}&search=${searchTerm.value}`);
 
                 blogsAll.value = response.data;
@@ -77,31 +112,7 @@ export const useBlogStore = defineStore('blog', () => {
                 console.log(error);
 
             } finally {
-                isLoading.value = false;
-            }
-
-        } else {
-            if (blogsAll.value?.data?.length > 0 && blogsAll.value?.current_page === page && !searchTerm.value) {
-
-                return
-            }
-
-            try {
-                console.log("page: ", page)
-
-                console.log("blog before fetch: ", blogs.value.data);
-                isLoading.value = true;
-                const response = await axios.get(`/posts/all?page=${page}&search=${searchTerm.value}`);
-
-                blogsAll.value = response.data;
-
-
-
-            } catch (error) {
-                console.log(error);
-
-            } finally {
-                isLoading.value = false;
+                isLoadingSpinner.value = false;
             }
 
         }
@@ -193,15 +204,15 @@ export const useBlogStore = defineStore('blog', () => {
         }
 
         // Debug FormData content
-        for (const pair of formData.entries()) {
-            console.log(`${pair[0]}:`, pair[1]);
-        }
+        // for (const pair of formData.entries()) {
+        //     console.log(`${pair[0]}:`, pair[1]);
+        // }
 
         try {
             const response = await axios.post('/posts/create', formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            console.log("response: ", response.data);
+
             push.success(response.data.message);
             router.push('/admin/blogs')
             clearData();
@@ -232,7 +243,7 @@ export const useBlogStore = defineStore('blog', () => {
     const updateBlog = async (id) => {
         const formData = new FormData();
 
-        console.log("edit blog details: ", JSON.parse(JSON.stringify(editBlogDetails.value)));
+        // console.log("edit blog details: ", JSON.parse(JSON.stringify(editBlogDetails.value)));
 
         formData.append('title', editBlogDetails.value.title);
         formData.append('description', editBlogDetails.value.description);
@@ -242,20 +253,18 @@ export const useBlogStore = defineStore('blog', () => {
         if (editBlogDetails.value.image instanceof File) {
 
             formData.append('image', editBlogDetails.value.image);
-        } else {
-            console.warn("Image is not a file, skipping upload.");
         }
 
-        for (let pair of formData.entries()) {
-            console.log(pair[0], pair[1]);
-        }
+        // for (let pair of formData.entries()) {
+        //     console.log(pair[0], pair[1]);
+        // }
 
 
 
         try {
 
             const response = await axios.put(`/posts/${id}/update`, formData);
-            console.log("response: ", response.data);
+            // console.log("response: ", response.data);
 
             router.push('/admin/blogs');
             push.success(response.data.message);
@@ -291,15 +300,15 @@ export const useBlogStore = defineStore('blog', () => {
     const getBlogById = async (id) => {
 
         if (id == blogEdit.value?.id) {
-            console.log("not refreshed");
+            isError.value = false;
             return
         }
         try {
             blogEdit.value = {};
-            isLoading.value = true;
+            isLoadingSpinner.value = true;
             const response = await axios.get(`/posts/${id}/edit`)
             blogEdit.value = response.data;
-            console.log("blog: ", blogEdit.value)
+
 
             editBlogDetails.value.title = blogEdit.value.title
             editBlogDetails.value.content = blogEdit.value.content
@@ -307,7 +316,7 @@ export const useBlogStore = defineStore('blog', () => {
             editBlogDetails.value.image = blogEdit.value.image
             editBlogDetails.value.status = blogEdit.value.status
             editor.value = blogEdit.value.content
-            console.log("blog: ", blogEdit.value)
+
 
 
 
@@ -316,7 +325,7 @@ export const useBlogStore = defineStore('blog', () => {
             console.log(error)
 
         } finally {
-            isLoading.value = false;
+            isLoadingSpinner.value = false;
         }
     }
 

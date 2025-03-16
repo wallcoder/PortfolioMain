@@ -33,7 +33,7 @@ onMounted(() => {
             <Loader />
         </div>
         <div class="flex flex-col " v-else v-motion-fade-visible-once>
-            <h2 class="text-3xl py-2">
+            <h2 class="text-2xl smartphone-lg:text-3xl py-2">
                 {{ blog.title }}
             </h2>
             <img :src="`${api}/${blog.image}`" :alt="blog.title"
