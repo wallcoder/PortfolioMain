@@ -224,7 +224,7 @@ const works = ref([
                                         <img class="w-6" src="@/assets/express1.svg" alt="" v-else>
                                         <span
                                             class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            Express
+                                            Express.js
                                         </span>
                                     </span>
                                     <span
@@ -291,7 +291,7 @@ const works = ref([
                                         <img class="w-6" src="@/assets/express1.svg" alt="" v-else>
                                         <span
                                             class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            Express
+                                            Express.js
                                         </span>
                                     </span>
                                     <span
@@ -299,7 +299,7 @@ const works = ref([
                                         <img class="w-6" src="@/assets/postgre.svg" alt="">
                                         <span
                                             class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            MySQL
+                                            Postgre
                                         </span>
                                     </span>
 
@@ -340,7 +340,7 @@ const works = ref([
                                         <img class="w-6 " src="@/assets/laravel.svg" alt="">
                                         <span
                                             class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            Vue.js
+                                            Laravel
                                         </span>
                                     </span>
 

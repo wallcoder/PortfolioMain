@@ -21,11 +21,10 @@ const github = import.meta.env.VITE_GH
 </script>
 
 <template>
-    <section v-motion-fade-visible-once
-        class="min-h-[600px] py-6 flex   smartphone-landscape:mt-0  ">
+    <section v-motion-fade-visible-once class=" justify-center  h-[400px] mb-36 smartphone-xl:h-[600px] py-6 smarthpone-xl:mb-0 flex   smartphone-landscape:mt-0  ">
 
         <div
-            class="flex-col flex  smartphone-xl:flex-row items-center  relative w-full smartphone-landscape:justify-center ">
+            class="flex-col flex  smartphone-xl:flex-row items-center justify-center  relative w-full  ">
             <div class="flex flex-col gap-1 z-[2]">
                 <div class="text-3xl tablet:text-4xl">Biakropuia</div>
                 <div class="text-xl tablet:text-2xl flex gap-1 "><i class="fa-solid fa-code "
@@ -37,16 +36,27 @@ const github = import.meta.env.VITE_GH
 
                 </div>
                 <span class="flex">
-                    <ButtonExt :link="`mailto:${email}`" content="Connect" />
+                    <a target="_blank" :href="`mailto:${email}`"
+                        class="smartphone-xl:hidden cursor-pointer flex items-center gap-1  py-2 px-3 rounded-lg shadow-[]  connect-btn text-center  transition-all duration-200  dark:text-white dark:hover:text-bg-lm dark:hover:border-bg-lm dark:hover:bg-none"
+                        :class="[isDark ? 'border-2 border-white ' : 'connect-btn-lm bg-bg-lm hover:bg-[#e7e7e7]']">
+                        Connect </a>
+                    <ButtonExt :link="`mailto:${email}`" content="Connect" class="hidden smartphone-xl:block" />
                 </span>
             </div>
             <img src="@/assets/halloween.png" alt=""
-                class="hidden smartphone-xl:block top-[180px] z-1  ml-2 w-[300px] absolute smartphone-landscape:static smartphone-landscape:w-[300px] tablet:w-[300px] laptop:w-[400px] "
+                class=" smartphone-xl:hidden top-[210px] z-1 ml-2 w-[400px] absolute smartphone-xl:static smartphone-xl:w-[300px] tablet:w-[300px] laptop:w-[400px]"
+                v-if="isDark" style="
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+     ">
+            <img src="@/assets/halloween.png" alt=""
+                class=" hidden smartphone-xl:block top-[210px] z-1 ml-2 w-[400px] absolute smartphone-xl:static smartphone-xl:w-[300px] tablet:w-[300px] laptop:w-[400px]"
                 v-if="isDark">
 
 
+
             <img src="@/assets/tokyobg.png" alt=""
-                class="top-[230px] z-1 ml-2 w-[400px] absolute smartphone-xl:static smartphone-xl:w-[300px] tablet:w-[300px] laptop:w-[400px]"
+                class="top-[210px] z-1 ml-2 w-[400px] absolute smartphone-xl:static smartphone-xl:w-[300px] tablet:w-[300px] laptop:w-[400px]"
                 v-else>
         </div>
 

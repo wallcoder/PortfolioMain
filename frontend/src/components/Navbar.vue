@@ -112,7 +112,8 @@ onUnmounted(() => {
                     <!-- <RouterLink to="/blogs" class="py-4 w-full" @click="isOpen = false">Blogs</RouterLink> -->
                     <RouterLink to="/#works" class="py-4 w-full" @click="isOpen = false">Projects</RouterLink>
                     <RouterLink to="/#about" class="py-4 w-full" @click="isOpen = false">About</RouterLink>
-                    <a :link="`mailto:${email}`" class="py-4 w-full" @click="isOpen = false">Connect</a>
+                    <a href="/resume.pdf" download class="cursor-pointer py-4 w-full">CV</a>
+                    <a :href="`mailto:${email}`" class="py-4 w-full" @click="isOpen = false">Connect</a>
                 </div>
             </div>
 
