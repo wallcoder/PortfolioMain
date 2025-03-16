@@ -14,7 +14,7 @@ const { toggleDark } = theme;
 </script>
 
 <template>
-    <section class="min-h-[100vh] laptop:px-[15%]  tablet:px-[8%] px-[2%]">
+    <section class="min-h-[100vh] laptop:px-[15%]  tablet:px-[8%] px-[6%]">
         <Hero />
         <Works />
         <About />

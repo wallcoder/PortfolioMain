@@ -10,6 +10,8 @@ import AdminCreateBlog from '@/views/AdminCreateBlog.vue'
 import AdminEditBlog from '@/views/AdminBlogEdit.vue'
 import Login from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
+import SiteMaintain from '@/views/SiteMaintain.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,17 +25,17 @@ const router = createRouter({
         name: 'home',
         component: Home
       },
-      {
-        path: '/blogs',
-        name: 'blogs',
-        component: Blog
-      },
-      {
-        path: '/blog/:slug',
-        name: 'blog-page',
-        props: true,
-        component: BlogPage
-      },
+      // {
+      //   path: '/blogs',
+      //   name: 'blogs',
+      //   component: Blog
+      // },
+      // {
+      //   path: '/blog/:slug',
+      //   name: 'blog-page',
+      //   props: true,
+      //   component: BlogPage
+      // },
 
       ]
     },
@@ -71,6 +73,16 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
+      meta: {
+        requiresLogout: true
+      }
+
+    },
+    {
+      path: '/maintenance',
+      name: 'maintenance',
+      component: SiteMaintain,
+      meta: { requiresCheck: true }
 
     },
     { path: "/:pathMatch(.*)*", component: NotFound }, // Catch-all 404 route
@@ -90,13 +102,31 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
+  const site = useAuthStore();
+
+ 
+  if (site.siteMaintain && to.path !== '/maintenance') {
+    return next('/maintenance');
+  }
+
 
   if (to.meta.requiresAuth && !token) {
-    next('/login');
-  } else {
-    next();
+    return next('/login');
   }
+
+  else if (to.meta.requiresLogout && token){
+    return next('/admin')
+  }
+
+  
+
+  if (!site.siteMaintain && to.path == '/maintenance') {
+    return next('/notfound')
+  }
+
+  next();
 });
+
 
 
 export default router

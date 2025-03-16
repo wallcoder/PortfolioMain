@@ -3,12 +3,14 @@ import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
+import { useLoaderStore } from '@/stores/loader';
 
 const user = ref(null);
 const auth = useAuthStore();
 const token = ref(null)
 const { email, password, error, router } = storeToRefs(auth);
 const { logout } = auth;
+const { isLoading, isError } = storeToRefs(useLoaderStore())
 // Retrieve user data from localStorage
 const storedUser = localStorage.getItem('user');
 const storedToken = localStorage.getItem('token');
@@ -48,7 +50,7 @@ if (storedToken) {
         </nav>
         <div class="w-full">
             <button class="w-full p-2 bg-[#b67dd1] hover:bg-[#c386df] font-semibold text-white rounded-lg"
-                @click="logout()">LOG OUT</button>
+                @click="logout()"><span v-if="isLoading">LOGGING OUT...</span><span v-else>LOG OUT</span></button>
 
         </div>
 

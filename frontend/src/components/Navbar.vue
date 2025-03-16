@@ -52,8 +52,8 @@ onUnmounted(() => {
 <template>
     <div class="sticky top-0 z-10">
         <header :class="[isNavbarVisible ? 'translate-y-0' : '-translate-y-full', isDark ? 'bg-bg-dm/85' : 'bg-bg-lm/70']"
-            class=" transition-transform duration-300 ease-in-out z-9 flex items-center laptop:px-[15%] tablet:px-[8%] px-[2%] py-[20px] justify-between sticky absolute top-0 backdrop-blur-xl">
-            
+            class=" transition-transform duration-300 ease-in-out z-9 flex items-center laptop:px-[15%] tablet:px-[8%] px-[6%] py-[20px] justify-between sticky absolute top-0 backdrop-blur-xl">
+
 
             <span class="flex items-center gap-4">
                 <i class="tablet:hidden fa-solid fa-bars text-2xl cursor-pointer " @click="toggleIsOpen()"></i>
@@ -61,9 +61,10 @@ onUnmounted(() => {
             </span>
             <nav class="flex text-sm items-center gap-12">
                 <div class="hidden tablet:flex items-center gap-12 ">
-                    <RouterLink to="/blogs">Blogs</RouterLink>
+                    <!-- <RouterLink to="/blogs">Blogs</RouterLink> -->
                     <RouterLink to="/#works">Projects</RouterLink>
                     <RouterLink to="/#about">About</RouterLink>
+                    <a href="/resume.pdf" download class="cursor-pointer">CV</a>
                     <ButtonExt :link="`mailto:${email}`" content="Connect" />
                 </div>
 
@@ -74,7 +75,7 @@ onUnmounted(() => {
                         :class="isDark ? 'text-a-dm' : 'text-a-lm'"></i>
                     <i class="fa-regular fa-sun cursor-pointer hover:text-[#414141]" v-else @click="toggleDark()"
                         :class="isDark ? 'text-a-dm' : ''"></i>
-                    
+
 
 
                 </span>
@@ -90,7 +91,7 @@ onUnmounted(() => {
         </header>
 
         <!-- Slider -->
-        <div class="w-full h-100vh fixed top-0 z-10 slider  tablet:hidden">
+        <div class="w-full h-100vh fixed top-0 z-10 slider  tablet:hidden ">
             <Transition>
                 <div class="absolute = w-full h-[100vh] opacity-50  bg " :class="isDark ? 'bg-bg-lm/20' : 'bg-bg-dm'"
                     @click="isOpen = false" v-if="isOpen"></div>
@@ -98,7 +99,7 @@ onUnmounted(() => {
 
 
             <div :class="[isOpen ? 'transform translate-x-[0%]' : 'transform translate-x-[-100%]'], isDark ? 'bg-bg-dm' : 'bg-bg-lm'"
-                class="absolute h-[100vh]  w-full smartphone-landscape:w-[40%] top-0 left-0 flex flex-col p-4   div-all duration-200 ease-linear">
+                class="absolute h-[100vh]  w-full smartphone-landscape:w-[40%] top-0 left-0 flex flex-col p-4 px-[4%]   div-all duration-200 ease-linear">
                 <div class="w-full flex items-center justify-between text-xl ">
 
                     <i class="tablet:hidden fa-solid fa-bars text-2xl cursor-pointer " @click="toggleIsOpen()"></i>
@@ -108,10 +109,10 @@ onUnmounted(() => {
                         :class="isDark ? 'text-a-dm' : ''"></i>
                 </div>
                 <div class="flex flex-col pt-5">
-                    <RouterLink to="/blogs" class="py-4 w-full" @click="isOpen = false">Blogs</RouterLink>
+                    <!-- <RouterLink to="/blogs" class="py-4 w-full" @click="isOpen = false">Blogs</RouterLink> -->
                     <RouterLink to="/#works" class="py-4 w-full" @click="isOpen = false">Projects</RouterLink>
                     <RouterLink to="/#about" class="py-4 w-full" @click="isOpen = false">About</RouterLink>
-                    <RouterLink :link="`mailto:${email}`" class="py-4 w-full" @click="isOpen = false">Connect</RouterLink>
+                    <a :link="`mailto:${email}`" class="py-4 w-full" @click="isOpen = false">Connect</a>
                 </div>
             </div>
 
