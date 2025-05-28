@@ -22,12 +22,15 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 </script>
 
 <template>
-    <section class="flex flex-col gap-5 pb-20" v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
-        <h2 class="text-2xl font-semibold " v-motion-fade-visible-once>Skills</h2>
+    <section class="flex flex-col gap-5 md:px-[8%] px-[6%] pb-20 " v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
+        <h2 class="text-xl text-grey-light  font-semibold " v-motion :initial="initialValue"
+                :visibleOnce="visibleOnceValue">
+                Skills
+            </h2>
 
         <div class="flex gap-3 flex-wrap">
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/vue.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -36,7 +39,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span v-if="!isDark"
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/express1.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -45,7 +48,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span v-else
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/express2.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -54,7 +57,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/tailwind.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -64,7 +67,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
             </span>
 
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/js.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -73,7 +76,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-16" src="@/assets/cplusplus.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -83,7 +86,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
             </span>
 
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/laravel.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -92,7 +95,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/mysql.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -101,7 +104,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/postgre.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -110,7 +113,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
 
             </span>
             <span
-                class="w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
+                class="hover:-translate-y-1 w-16 h-16 cursor-pointer bg-s-lm dark:bg-s-dm rounded-lg flex justify-center items-center relative group">
                 <img class="w-10" src="@/assets/nodejs.svg" alt="">
                 <span
                     class="absolute top-[-45px] left-1/2 -translate-x-1/2 bg-s-lm dark:bg-s-dm text-sm p-2 rounded-md text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">

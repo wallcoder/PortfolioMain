@@ -12,6 +12,11 @@ export const useAuthStore = defineStore('auth', () => {
     const password = ref('');
     const error = ref('');
     const router = useRouter();
+    const label = ref({
+        head: '',
+        headsec: '',
+        sub: '',
+    })
     const { isLoading, isError, isLoadingSpinner } = storeToRefs(useLoaderStore())
 
     const clearData = () => {
@@ -86,5 +91,5 @@ export const useAuthStore = defineStore('auth', () => {
     };
 
 
-    return { siteMaintain, email, password, error, router, login, logout }
+    return { siteMaintain, email, password, error, router, login, logout, label }
 })

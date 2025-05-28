@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import {storeToRefs} from 'pinia'
+import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme';
 
 const theme = useThemeStore()
@@ -14,11 +14,11 @@ const props = defineProps({
         required: true
     },
 
-    extraStyle:  {
+    extraStyle: {
         type: String,
         required: false
     },
-    link:{
+    link: {
         type: String,
         required: false
     },
@@ -31,8 +31,8 @@ const props = defineProps({
 })
 </script>
 <template>
-    <a target="_blank" :href="link"  class="cursor-pointer flex items-center gap-1  py-2 px-3 rounded-lg shadow-[] connect-btn text-center  transition-all duration-200  dark:text-a-dm dark:hover:text-bg-lm dark:hover:border-bg-lm dark:hover:bg-none" :class="[isDark ? 'connect-btn-dm ': 'connect-btn-lm bg-bg-lm hover:bg-[#e7e7e7]', props.extraStyle ? props.extraStyle : '' ]">
-       <i :class="props.iconStyle" class="" v-if="props.iconStyle"></i> {{ props.content }}</a>
+    <a target="_blank" :href="link" class="cursor-pointer flex items-center gap-1  py-2 px-3 bg-acc '">
+        <i :class="props.iconStyle" class="" v-if="props.iconStyle"></i> {{ props.content }}</a>
 </template>
 
 <style scoped>

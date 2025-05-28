@@ -11,6 +11,8 @@ import AdminEditBlog from '@/views/AdminBlogEdit.vue'
 import Login from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
 import SiteMaintain from '@/views/SiteMaintain.vue'
+import Projects from '@/views/Projects.vue'
+import About from '@/views/About.vue'
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
@@ -25,17 +27,27 @@ const router = createRouter({
         name: 'home',
         component: Home
       },
-      // {
-      //   path: '/blogs',
-      //   name: 'blogs',
-      //   component: Blog
-      // },
-      // {
-      //   path: '/blog/:slug',
-      //   name: 'blog-page',
-      //   props: true,
-      //   component: BlogPage
-      // },
+      {
+        path: '/projects',
+        name: 'projects',
+        component: Projects
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: About
+      },
+      {
+        path: '/blogs',
+        name: 'blogs',
+        component: Blog
+      },
+      {
+        path: '/blog/:slug',
+        name: 'blog-page',
+        props: true,
+        component: BlogPage
+      },
 
       ]
     },

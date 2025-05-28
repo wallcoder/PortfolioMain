@@ -1,31 +1,52 @@
 <script setup>
-import {useLoaderStore} from "@/stores/loader"
-import {ref} from 'vue'
-import {storeToRefs} from 'pinia'
+import { useLoaderStore } from "@/stores/loader"
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 
-const {isLoading} = storeToRefs(useLoaderStore())
+const { isLoading } = storeToRefs(useLoaderStore())
 
 </script> 
 <template>
-    <div class="w-10 h-10  flex items-center justify-center" v-if="isLoading">
-        <div class="circle  rounded-full bg-a-lm dark:bg-a-dm"></div>
+    <div class="loader">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
     </div>
 </template>
 <style scoped>
-@keyframes scaling {
-
-    0%,
-    100% {
-        width: 30px;
-        height: 30px;
-    }
-
-    50% {
-        width: 10px;
-        height: 10px;
-    }
+/* From Uiverse.io by aryamitra06 */
+.loader {
+    display: flex;
+    align-items: center;
 }
 
-.circle {
-    animation: scaling 2s infinite ease-in-out;
-}</style>
+.bar {
+    display: inline-block;
+    width: 3px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    animation: scale-up4 1s linear infinite;
+}
+
+.bar:nth-child(2) {
+    height: 35px;
+    margin: 0 5px;
+    animation-delay: .25s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: .5s;
+}
+
+@keyframes scale-up4 {
+    20% {
+        background-color: #ffffff;
+        transform: scaleY(1.5);
+    }
+
+    40% {
+        transform: scaleY(1);
+    }
+}
+</style>

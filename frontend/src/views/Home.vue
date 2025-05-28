@@ -1,22 +1,36 @@
 <script setup>
 
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@/stores/theme';
+import { useAuthStore } from '@/stores/auth';
 import Hero from '@/components/Hero.vue'
 import Works from '@/components/Works.vue'
 import About from '@/components/About.vue'
 import Skills from '@/components/Skills.vue'
+import RecentBlogs from '@/components/RecentBlogs.vue'
+const {label} = storeToRefs(useAuthStore())
+
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 const { toggleDark } = theme;
+
+onMounted(()=>{
+    label.value = {
+        head: 'biaka',
+        headsec: 'dev',
+        sub: 'software developer'
+    }
+})
+
 </script>
 
 <template>
-    <section class="min-h-[100vh] laptop:px-[15%]  tablet:px-[8%] px-[6%]">
-        <Hero />
+    <section class="min-h-[100vh]  flex flex-col gap-16">
+        <!-- <Hero /> -->
         <Works />
+        <RecentBlogs />
         <About />
         <Skills />
 

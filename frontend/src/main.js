@@ -1,6 +1,8 @@
 import './assets/main.css'
 import { MotionPlugin } from '@vueuse/motion'
 import axios from 'axios'
+import 'boxicons'
+import 'boxicons/css/boxicons.min.css';
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import Particles from 'vue3-particles';
