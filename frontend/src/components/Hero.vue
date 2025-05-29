@@ -42,7 +42,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <section class="  laptop:px-[8%]  tablet:px-[10%] px-[6%] py-[30vh] 2xl:py-[20vh] h-[550px] px-[10%] md:px-0 text-white overflow-hidden">
+    <section v-if="$route.name !== 'blog-page' && $route.name !== 'project-page'" class="  laptop:px-[8%]  tablet:px-[10%] px-[6%] py-[30vh] 2xl:py-[20vh] h-[550px] px-[10%] md:px-0 text-white overflow-hidden">
         <!-- Skewed Background -->
         <div class="absolute top-0 left-0 w-full h-0 bg-red-200 ">
             <div

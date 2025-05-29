@@ -37,13 +37,9 @@ onMounted(() => {
                 appreciate.
             </p>
             <div class=" flex gap-2">
-
-                <a href="mailto:biakropuia4@gmail.com"
-                    class="bg-acc px-3 py-2 active:brightness-[0.85] rounded-lg text-sm  hover:-translate-y-[1.5px]">Get in
-                    touch</a>
-                <a href="/resume.pdf" target="_blank"
-                    class="bg-acc px-3 py-2 active:brightness-[0.85] rounded-lg text-sm  hover:-translate-y-[1.5px]">Download
-                    CV</a>
+                <ButtonExt content="Get in touch" link="mailto:biakropuia4@gmail.com" />
+                <ButtonExt content="Download CV" link="/resume.pdf" />
+                
             </div>
         </div>
 

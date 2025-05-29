@@ -1,6 +1,7 @@
 <script setup>
 import { useAnimationStore } from '@/stores/animation';
 import { storeToRefs } from 'pinia'
+import { RouterLink } from 'vue-router'
 const anim = useAnimationStore()
 const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceValueImg } = storeToRefs(anim)
 </script>
@@ -8,7 +9,8 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
     <div class="relative  bg  py-8 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-3 gap-3  " v-motion
         :initial="initialValue" :visibleOnce="visibleOnceValue">
 
-        <div class="relative top-0 left-0 overflow-hidden h-[250px] rounded-lg flex flex-col justify-end group cursor-pointer "
+        <RouterLink to="/blog/abc"
+            class="relative top-0 left-0 overflow-hidden h-[250px] rounded-lg flex flex-col justify-end group cursor-pointer "
             v-for="n in 4">
             <!-- Gradient Shadow Overlay (left to right) -->
             <div class="absolute top-0 left-0 w-full h-full z-10  group-hover:bg-black/20" style="">
@@ -42,7 +44,7 @@ const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceV
                 <img src="@/assets/wall.webp" alt=""
                     class="w-full object-cover  h-full rounded-t-lg group-hover:scale-[1.05] transition-transform duration-300 ease-in-out" />
             </div>
-        </div>
+        </RouterLink>
 
 
 

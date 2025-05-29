@@ -42,7 +42,7 @@ export default {
         'a-lm': '#F4333F',
         'a-dm': '#81619E',
 
-        'acc': '#F8466E'
+        'acc': '#5383DD'
 
 
       },

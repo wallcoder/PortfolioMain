@@ -3,6 +3,7 @@ import Layout from '../views/Layout.vue'
 import Home from '@/views/Home.vue'
 import Blog from '@/views/Blog.vue'
 import BlogPage from '@/views/BlogPage.vue'
+import ProjectPage from '@/views/ProjectPage.vue'
 import AdminLayout from '@/views/AdminLayout.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import AdminBlogs from '@/views/AdminBlogs.vue'
@@ -47,6 +48,12 @@ const router = createRouter({
         name: 'blog-page',
         props: true,
         component: BlogPage
+      },
+      {
+        path: '/project/:slug',
+        name: 'project-page',
+        props: true,
+        component: ProjectPage
       },
 
       ]
