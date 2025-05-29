@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { Pagination } from 'swiper/modules'; // Import Pagination module
 import 'swiper/css';
 import { useMotion } from "@vueuse/motion";
-
+import { RouterLink } from 'vue-router'
 import { useAnimationStore } from '@/stores/animation';
 import { ref } from 'vue'
 import { useThemeStore } from '@/stores/theme'
@@ -28,92 +28,76 @@ const onSlideChange = () => {
 </script>
 
 <template>
-    <section class="py-32 " id="about" v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
-        <Swiper :modules="[Pagination]" :slides-per-view="1" :space-between="50" :pagination="{ clickable: true }"
-            @swiper="onSwiper" @slideChange="onSlideChange">
-            <SwiperSlide>
-                <div class="flex flex-col tablet-large:flex-row gap-6 pb-10">
-                    <div class="flex flex-col w-full tablet-large:w-1/2 gap-5" v-motion-fade-visible-once>
-                        <h3 class="text-gray-400 flex items-center gap-2 text-lg">
-                            <img class="w-8 h-3" src="../assets/Arrow.png" alt="" />
-                            Hello Again
-                        </h3>
-                        <div class="flex flex-col gap-3">
-                            <h2 class="text-2xl font-semibold">I'm Biaka</h2>
-                            <p class="text-base leading-relaxed">
-                                I'm a Full-Stack Developer based in Aizawl, currently studying at Mizoram
-                                University. I have a strong interest in web application development and love finding new
-                                ways to create intuitive and engaging digital experiences. Always eager to grow, I
-                                continuously explore new technologies to enhance my skills and stay updated with the latest
-                                trends.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="w-full tablet-large:w-[50%] flex items-center justify-center  pt-2 " v-motion-fade-visible-once>
-                        <div class="relative  ">
-                            <img src="/pro.jpeg" alt=""
-                                class="w-[200px] h-[250px] bg-gray-100 rounded-lg object-cover">
-                            <div class="glowing-circle top-5 left-4" v-if="isDark"></div>
-                        </div>
+    <section class=" md:px-[8%] px-[6%]" id="about" v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
 
-                    </div>
-                </div>
-            </SwiperSlide>
+        <div class="flex flex-col tablet-large:flex-row gap-6 pb-10">
+            <div class="flex flex-col w-full tablet-large:w-1/2 gap-5" v-motion-fade-visible-once>
+                <h3 class="text-gray-400 flex items-center gap-2 text-lg">
+                    <img class="w-8 h-3" src="../assets/Arrow.png" alt="" />
+                    Hello Again
+                </h3>
+                <div class="flex flex-col gap-3">
+                    <h2 class="text-2xl font-semibold">I'm Biaka</h2>
+                    <p class="text-base leading-relaxed">
+                        I'm a full-stack developer with a growing passion for building web applications that are clean,
+                        fast, and easy to use. While I’m still early in my journey, I’ve spent a lot of time learning how to
+                        create tools that not only work well, but also feel good to use — especially for developers.
 
-            <SwiperSlide>
-                <div class="flex flex-col tablet-large:flex-row  gap-6">
-                    <div class="flex flex-col w-full tablet:w-1/2 gap-5" v-motion-fade-visible-once>
-                        <!-- <h3 class="text-gray-400 flex items-center gap-2 text-lg">
-                            <img class="w-8 h-3" src="../assets/Arrow.png" alt="" />
-                            Hello Again
-                        </h3> -->
-                        <div class="flex flex-col gap-3 mt-16">
-                            <h2 class="text-2xl font-semibold">Beyond Coding,</h2>
-                            <p class="text-base leading-relaxed">
-                                I enjoy music production, gaming, and fitness. I like learning new things and gradually
-                                improving my skills, whether it's in tech or my hobbies. I'm always looking for
-                                opportunities to grow and apply what I learn in meaningful ways.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="w-full tablet-large:w-[50%] flex items-center justify-center h-[200px] " v-motion-fade-visible-once>
-                        <div src="" alt=""
-                            class="w-[190px] h-[200px]  rounded-lg object-cover "> </div>
-                    </div>
-                </div>
-            </SwiperSlide>
 
-            <!-- <SwiperSlide>
-                <div class="flex flex-col smartphone-landscape:flex-row gap-6">
-                    <div class="flex flex-col w-full tablet:w-1/2 gap-5" v-motion-fade-visible-once>
-                        <h3 class="text-gray-400 flex items-center gap-2 text-lg">
-                            <img class="w-8 h-3" src="../assets/Arrow.png" alt="" />
-                            Hello Again
-                        </h3>
-                        <div class="flex flex-col gap-3">
-                            <h2 class=" pb-2 text-xl  smartphone-lg:text-2xl font-semibold">I'm Biaka</h2>
-                            <p class="pb-2 text-sm  smartphone-lg:text-base leading-relaxed ">
-                                I’m a software developer passionate about creating intuitive, efficient, and impactful
-                                applications.
-                                I thrive on solving problems and turning ideas into seamless digital experiences.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="w-full tablet:w-[50%] flex items-center justify-center relative" v-motion-fade-visible-once>
-                        <img src="../assets/halloween_background.png.jpg" alt=""
-                            class="w-[190px] h-[200px] bg-gray-100 rounded-lg object-cover">
 
+
+                    </p>
+                    <p>
+                        Along the way, I’ve started to develop my own perspective on what makes good software: clarity,
+                        structure, and a focus on the user. I’m always experimenting, asking questions, and refining my
+                        skills as I go.
+
+                    </p>
+                    <p>
+                        Right now, I’m focused on learning by building — turning ideas into projects, and projects into
+                        experience.
+                    </p>
+                    <div>
+                        <RouterLink to="/about"
+                            class="text-grey-light text-sm font-semibold cursor-pointer hover:text-white ">KNOW MORE <i
+                                class="fa-solid fa-arrow-right  more"></i></RouterLink>
                     </div>
 
                 </div>
-            </SwiperSlide> -->
+            </div>
+            <div class="w-full tablet-large:w-[50%] flex items-center justify-center  pt-2 " v-motion-fade-visible-once>
+                <div class="relative  ">
+                    <img src="@/assets/fracturedjinx.jpg" alt="" class="animated-border-radius" />
+                    <div class="glowing-circle top-8 left-6"></div>
+                </div>
 
-        </Swiper>
+            </div>
+        </div>
 
 
     </section>
 </template>
 <style scoped>
+.more {
+    animation: ping 1.5s ease-in-out infinite;
+
+}
+
+@keyframes ping {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 :deep(.swiper-pagination-bullet) {
     background-color: #707070;
     /* Gray color */
@@ -128,6 +112,35 @@ const onSlideChange = () => {
     /* Blue color */
 
     opacity: 1;
+}
+
+
+@keyframes borderRadiusMorph {
+    0% {
+        border-top-left-radius: 20%;
+        border-bottom-left-radius: 40%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    50% {
+        border-radius: 40px;
+    }
+
+    100% {
+        border-top-left-radius: 20%;
+        border-bottom-left-radius: 40%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.animated-border-radius {
+    width: 280px;
+    height: 250px;
+    background-color: #f3f4f6;
+    object-fit: cover;
+    animation: borderRadiusMorph 3s ease-in-out infinite;
 }
 
 @keyframes flicker {

@@ -3,13 +3,17 @@
 @tailwind utilities;
 
 html {
-  font-family: "Kufam", serif;
-  
- 
-  
+  font-family: "Host Grotesk", sans-serif;
+
+
+
 }
-*{
+
+* {
   transition: all 120ms linear;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* standard version */
 }
 
 /* * {

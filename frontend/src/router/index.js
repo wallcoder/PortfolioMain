@@ -3,6 +3,7 @@ import Layout from '../views/Layout.vue'
 import Home from '@/views/Home.vue'
 import Blog from '@/views/Blog.vue'
 import BlogPage from '@/views/BlogPage.vue'
+import ProjectPage from '@/views/ProjectPage.vue'
 import AdminLayout from '@/views/AdminLayout.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import AdminBlogs from '@/views/AdminBlogs.vue'
@@ -11,6 +12,8 @@ import AdminEditBlog from '@/views/AdminBlogEdit.vue'
 import Login from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
 import SiteMaintain from '@/views/SiteMaintain.vue'
+import Projects from '@/views/Projects.vue'
+import About from '@/views/About.vue'
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
@@ -25,17 +28,33 @@ const router = createRouter({
         name: 'home',
         component: Home
       },
-      // {
-      //   path: '/blogs',
-      //   name: 'blogs',
-      //   component: Blog
-      // },
-      // {
-      //   path: '/blog/:slug',
-      //   name: 'blog-page',
-      //   props: true,
-      //   component: BlogPage
-      // },
+      {
+        path: '/projects',
+        name: 'projects',
+        component: Projects
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: About
+      },
+      {
+        path: '/blogs',
+        name: 'blogs',
+        component: Blog
+      },
+      {
+        path: '/blog/:slug',
+        name: 'blog-page',
+        props: true,
+        component: BlogPage
+      },
+      {
+        path: '/project/:slug',
+        name: 'project-page',
+        props: true,
+        component: ProjectPage
+      },
 
       ]
     },

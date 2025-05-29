@@ -27,10 +27,10 @@ const copy = async ()=>{
 }
 </script>
 <template>
-    <footer class="w-full flex flex-col gap-2 laptop:px-[15%]  tablet:px-[8%] px-[6%] py-[20px]  py-14">
+    <footer class="w-full flex flex-col gap-2 md:px-[8%] px-[6%] py-[20px]  py-16">
         <h2 class="text-xl">Let's Connect</h2>
         <div class="text-[#aaaaaa]">Any questions, proposals, or collaborations? Feel free to reach out</div>
-        <div class="flex items-center gap-1 " :class="isDark ? 'text-a-dm' : 'text-a-lm'"><i
+        <div class="flex items-center gap-1 " :class="isDark ? 'text-acc' : 'text-a-lm'"><i
                 class="fa-regular fa-copy text-2xl cursor-pointer" @click="copy()"></i><a target="_blank" :href="`mailto:${email}`"
                 class="cursor-pointer">{{ email }}</a></div>
         <div class="flex items-center text-[28px] gap-2">

@@ -28,7 +28,7 @@ const { toggleDark } = theme;
 </script>
 
 <template>
-    <div class="min-w-[360px] max-w-[1920px] my-0 mx-auto bg-bg-lm dark:bg-bg-dm text-p-lm dark:text-p-dm">
+    <div class="min-w-[360px] max-w-[1920px] my-0 mx-auto bg-bg-dm text-p-dm">
         <RouterView />
         <Toast />
     </div>

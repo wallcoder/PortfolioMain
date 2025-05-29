@@ -24,9 +24,12 @@ export default {
 
       colors: {
         'bg-lm': '#FAFAFA',
-        'bg-dm': '#121212',
+        'bg-dm': '#0a0a0a',
 
+        'grey': '#383838',
+        'grey-dark': '#161616',
 
+        'grey-light': '#bbb',
         'admin-bg': '#F2F2F2',
         'admin-sb-bg': '#FFFFFF',
 
@@ -38,6 +41,8 @@ export default {
 
         'a-lm': '#F4333F',
         'a-dm': '#81619E',
+
+        'acc': '#5383DD'
 
 
       },
