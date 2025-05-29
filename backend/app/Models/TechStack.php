@@ -14,10 +14,12 @@ class TechStack extends Model
     
    }
 
-   public function user(): BelongsTo{
-    return $this->belongsTo(User::class);
+    public function info(): BelongsTo{
+    return $this->belongsTo(Info::class);
     
    }
+
+   
 
    public function project(): BelongsTo{
     return $this->belongsTo(Project::class);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tech_stacks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->nullable()->constrained('projects')->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('info_id')->nullable()->constrained('infos')->cascadeOnDelete();
             $table->foreignId('tech_id')->constrained('teches')->cascadeOnDelete();
             $table->timestamps();
         });
