@@ -24,132 +24,111 @@ const router = createRouter({
       path: '/',
       name: 'layout',
       component: Layout,
-      children: [{
-        path: '',
-        name: 'home',
-        component: Home
-      },
-      {
-        path: '/projects',
-        name: 'projects',
-        component: Projects
-      },
-      {
-        path: '/about',
-        name: 'about',
-        component: About
-      },
-      {
-        path: '/blogs',
-        name: 'blogs',
-        component: Blog
-      },
-      {
-        path: '/blog/:slug',
-        name: 'blog-page',
-        props: true,
-        component: BlogPage
-      },
-      {
-        path: '/project/:slug',
-        name: 'project-page',
-        props: true,
-        component: ProjectPage
-      },
-
-      ]
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: AdminLayout,
-      meta: { requiresAuth: true },
-
       children: [
         {
           path: '',
-          name: 'dashboard',
-          component: Dashboard
+          name: 'home',
+          component: Home,
+          meta: { title: 'Home - biakadev' }
         },
         {
-          path: 'blogs',
-          name: 'admin-blogs',
-          component: AdminBlogs
+          path: '/projects',
+          name: 'projects',
+          component: Projects,
+          meta: { title: 'Projects - biakadev' }
         },
         {
-          path: 'blog/create',
-          name: 'create-blog',
-          component: AdminCreateBlog
+          path: '/about',
+          name: 'about',
+          component: About,
+          meta: { title: 'About - biakadev' }
         },
         {
-          path: 'blog/:id/edit',
-          name: 'edit-blog',
-          component: AdminEditBlog,
-          props: true
+          path: '/blogs',
+          name: 'blogs',
+          component: Blog,
+          meta: { title: 'Blogs - biakadev' }
+        },
+        {
+          path: '/blog/:slug',
+          name: 'blog-page',
+          props: true,
+          component: BlogPage,
+          meta: { title: 'Blog - biakadev' }
+        },
+        {
+          path: '/project/:slug',
+          name: 'project-page',
+          props: true,
+          component: ProjectPage,
+          meta: { title: 'Project - biakadev' }
         }
       ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: {
-        requiresLogout: true
-      }
-
     },
     {
       path: '/maintenance',
       name: 'maintenance',
       component: SiteMaintain,
-      meta: { requiresCheck: true }
-
+      meta: {
+        requiresCheck: true,
+        title: 'Site Maintenance - biakadev'
+      }
     },
-    { path: "/404", component: NotFound},
-    { path: "/500", component: ServerError},
-    
-    { path: "/:pathMatch(.*)*", component: NotFound }, // Catch-all 404 route
-
-
+    {
+      path: '/404',
+      component: NotFound,
+      meta: { title: 'Page Not Found - biakadev' }
+    },
+    {
+      path: '/500',
+      component: ServerError,
+      meta: { title: 'Server Error - biakadev' }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: NotFound,
+      meta: { title: 'Page Not Found - biakadev' }
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {
         el: to.hash,
-        behavior: 'smooth', // Smooth scroll
-      };
+        behavior: 'smooth'
+      }
     }
-    return savedPosition || { top: 0 };
-  },
+    return savedPosition || { top: 0 }
+  }
 })
 
+// Guard for login/maintenance logic
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
-  const site = useAuthStore();
+  const token = localStorage.getItem('token')
+  const site = useAuthStore()
 
- 
   if (site.siteMaintain && to.path !== '/maintenance') {
-    return next('/maintenance');
+    return next('/maintenance')
   }
-
 
   if (to.meta.requiresAuth && !token) {
-    return next('/login');
+    return next('/login')
   }
 
-  else if (to.meta.requiresLogout && token){
+  if (to.meta.requiresLogout && token) {
     return next('/admin')
   }
 
-  
-
-  if (!site.siteMaintain && to.path == '/maintenance') {
+  if (!site.siteMaintain && to.path === '/maintenance') {
     return next('/')
   }
 
-  next();
-});
+  next()
+})
 
-
+// Set document title globally
+router.afterEach((to) => {
+  const defaultTitle = 'biakadev'
+  document.title = to.meta.title || defaultTitle
+})
 
 export default router
