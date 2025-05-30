@@ -4,11 +4,16 @@ import { storeToRefs } from 'pinia'
 import ButtonExt from '@/components/ButtonExt.vue'
 import { ref, onMounted } from 'vue'
 import Skills from '@/components/Skills.vue'
+import { useInfoStore } from '@/stores/info'
+import Loader from '@/components/Loader.vue'
+const { info, isLoadingInfo } = storeToRefs(useInfoStore())
+
+
 const { label } = storeToRefs(useAuthStore())
 const linkedIn = import.meta.env.VITE_LI
 const instagram = import.meta.env.VITE_IG
 const github = import.meta.env.VITE_GH
-
+const api = import.meta.env.VITE_STORAGE
 onMounted(() => {
     label.value = {
         head: 'About me',
@@ -19,34 +24,41 @@ onMounted(() => {
 
 </script>
 <template >
-    <section class=" flex flex-col gap-8  " id="works">
-        <div class="md:px-[8%] px-[6%] flex flex-col gap-6 ">
-            <p class="">
-                My name is Biakropuia. I build full-stack web applications using Vue, Laravel, and Tailwind. You can find me
-                on
-                <a :href="github" target="_blank" class="text-acc">GitHub</a>, <a :href="linkedIn" target="_blank"
-                    class="text-acc">LinkedIn</a>, and <a :href="instagram" target="_blank" class="text-acc">Instagram</a>.
-                I’m
-                always working on something new. These days, I’m focused on building <a href="#" target="_blank" class="text-acc">inlist</a>,
-                a rental propertly listing website.
-            </p>
-            <p>
-                My core passion lies in creating web applications that are fast, intuitive, and enjoyable to use. I
-                specialize
-                in full-stack development, crafting clean interfaces and efficient backends that developers and users both
-                appreciate.
-            </p>
-            <div class=" flex gap-2">
-                <ButtonExt content="Get in touch" link="mailto:biakropuia4@gmail.com" />
-                <ButtonExt content="Download CV" link="/resume.pdf" />
-                
-            </div>
+    <div>
+        <div class="w-full h-[20vh] flex  items-center justify-center" v-if="isLoadingInfo">
+            <Loader />
         </div>
 
-        <Skills />
+        <section v-else class=" flex flex-col gap-8  " id="works">
+            <div class="md:px-[8%] px-[6%] flex flex-col gap-6 ">
+                <div class="about-content " v-html="info?.main_about"></div>
+                <div class=" flex gap-2">
+                    <ButtonExt content="Get in touch" link="mailto:biakropuia4@gmail.com" />
+                    <ButtonExt content="Download CV" :link="`${api}/${info?.resume}`" />
+
+                </div>
+            </div>
+
+            <Skills />
 
 
 
 
 
-</section></template>
+        </section>
+    </div>
+</template>
+<style scoped>
+:deep(.about-content h2) {
+    line-height: 2rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+:deep(.about-content) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+</style>

@@ -21,7 +21,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <a :href="link" class="bg-acc cursor-pointer px-3 py-2 active:brightness-[0.85] rounded-lg text-sm  hover:-translate-y-[1.5px]">{{
+    <a :href="link" target="_blank" class="bg-acc cursor-pointer px-3 py-2 active:brightness-[0.85] rounded-lg text-sm  hover:-translate-y-[1.5px]">{{
         content }}</a>
 </template>
 

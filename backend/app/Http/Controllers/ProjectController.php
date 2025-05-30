@@ -14,7 +14,7 @@ class ProjectController extends Controller
             $limit = $request->input('limit', 10); 
 
             $projects = Project::select('id', 'category_id', 'title', 'background_color', 'image1', 'slug', 'created_at')->with(['category:id,name'])->orderBy('id')->cursorPaginate($limit);
-
+            
             return response()->json(['success'=>true, 'message'=>'Projects fetched successful', 'data'=>$projects ], 200);
 
         }catch(Exception $err){
@@ -33,6 +33,9 @@ class ProjectController extends Controller
                     }
                 ])
     ->first();
+    if(!$project){
+                return response()->json(['success'=>false, 'message'=>'Blog Not Found'], 404);
+            }
 
 
             return response()->json(['success'=>true, 'message'=>'Project fetched successful', 'data'=>$project ], 200);

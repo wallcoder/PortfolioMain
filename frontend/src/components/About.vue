@@ -9,12 +9,14 @@ import { useAnimationStore } from '@/stores/animation';
 import { ref } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 import 'swiper/css/pagination'; // Import Pagination styles
-
+import { useInfoStore } from '@/stores/info'
+import Loader from '@/components/Loader.vue'
+const { info, isLoadingInfo } = storeToRefs(useInfoStore())
 const theme = useThemeStore()
 const { isDark } = storeToRefs(theme)
 const anim = useAnimationStore()
 const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceValueImg } = storeToRefs(anim)
-
+const api = import.meta.env.VITE_STORAGE
 const onSwiper = (swiper) => {
     // console.log('Swiper initialized:', swiper);
 };
@@ -29,45 +31,31 @@ const onSlideChange = () => {
 
 <template>
     <section class=" md:px-[8%] px-[6%]" id="about" v-motion :initial="initialValue" :visibleOnce="visibleOnceValue">
+        
+        <div class="w-full h-[20vh] flex  items-center justify-center" v-if="isLoadingInfo">
+            <Loader />
+        </div>
 
-        <div class="flex flex-col tablet-large:flex-row gap-6 pb-10">
-            <div class="flex flex-col w-full tablet-large:w-1/2 gap-5" v-motion-fade-visible-once>
+        <div v-else class="flex  flex-col justify-center tablet-large:flex-row gap-6 ">
+            <div class="flex flex-col w-full tablet-large:w-1/2 gap-5 " v-motion-fade-visible-once>
                 <h3 class="text-gray-400 flex items-center gap-2 text-lg">
                     <img class="w-8 h-3" src="../assets/Arrow.png" alt="" />
                     Hello Again
                 </h3>
-                <div class="flex flex-col gap-3">
-                    <h2 class="text-2xl font-semibold">I'm Biaka</h2>
-                    <p class="text-base leading-relaxed">
-                        I'm a full-stack developer with a growing passion for building web applications that are clean,
-                        fast, and easy to use. While I’m still early in my journey, I’ve spent a lot of time learning how to
-                        create tools that not only work well, but also feel good to use — especially for developers.
-
-
-
-
-                    </p>
-                    <p>
-                        Along the way, I’ve started to develop my own perspective on what makes good software: clarity,
-                        structure, and a focus on the user. I’m always experimenting, asking questions, and refining my
-                        skills as I go.
-
-                    </p>
-                    <p>
-                        Right now, I’m focused on learning by building — turning ideas into projects, and projects into
-                        experience.
-                    </p>
+                <div class="flex flex-col  gap-4 ">
+                    <div class="about-content " v-html="info?.front_page_about"></div>
+                  
                     <div>
                         <RouterLink to="/about"
-                            class="text-grey-light text-sm font-semibold cursor-pointer hover:text-white ">KNOW MORE <i
+                            class="text-grey-light  text-sm font-semibold cursor-pointer hover:text-white ">KNOW MORE <i
                                 class="fa-solid fa-arrow-right  more"></i></RouterLink>
                     </div>
 
                 </div>
             </div>
-            <div class="w-full tablet-large:w-[50%] flex items-center justify-center  pt-2 " v-motion-fade-visible-once>
+            <div class="w-full  tablet-large:w-[50%] flex items-center justify-center  pt-2 " v-motion-fade-visible-once>
                 <div class="relative  ">
-                    <img src="@/assets/fracturedjinx.jpg" alt="" class="animated-border-radius" />
+                    <img :src="`${api}/${info?.image}`" alt="profile pic" class="animated-border-radius bg-grey" />
                     <div class="glowing-circle top-8 left-6"></div>
                 </div>
 
@@ -81,6 +69,22 @@ const onSlideChange = () => {
 .more {
     animation: ping 1.5s ease-in-out infinite;
 
+}
+
+:deep(.about-content h2) {
+  line-height: 2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+:deep(.about-content){
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+:deep(.about-content p) {
+  
 }
 
 @keyframes ping {
@@ -169,5 +173,4 @@ const onSlideChange = () => {
 
     transform: translate(-50%, -50%);
     animation: flicker 2s infinite ease-in-out;
-}
-</style>
+}</style>

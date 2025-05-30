@@ -2,37 +2,37 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from 'axios';
 
-export const useBlogStore = defineStore('blog', () => {
-    const blogs = ref([]);
+export const useProjectStore = defineStore('project', () => {
+    const projects = ref([]);
     const nextCursor = ref(null);
     const loading = ref(false);
     const hasMore = ref(true);
-    const isLoadingBlogPage = ref(false);
-    const blog = ref({});
+    const isLoadingProjectPage = ref(false);
+    const project = ref({});
 
-    const fetchBlogBySlug = async (slug) => {
+    const fetchProjectBySlug = async (slug) => {
         try {
             
-            if (slug === blog?.value?.slug) return;
+            if (slug === project?.value?.slug) return;
 
-            isLoadingBlogPage.value = true;
+            isLoadingProjectPage.value = true;
 
-            const response = await axios.get(`/blog/${slug}`);
-            blog.value = response.data.data;
+            const response = await axios.get(`/project/${slug}`);
+            project.value = response.data.data;
         } catch (err) {
             console.log(err);
         } finally {
-            isLoadingBlogPage.value = false;
+            isLoadingProjectPage.value = false;
         }
     };
 
-    const fetchBlogs = async (limit = 10, force=false) => {
+    const fetchProjects = async (limit = 10, force=false) => {
         if ((loading.value || !hasMore.value) && !force) return;
         loading.value = true;
         console.log("hello")
 
         try {
-            const res = await axios.get('/blogs', {
+            const res = await axios.get('/projects', {
                 params: {
                     limit,
                     cursor: nextCursor.value
@@ -42,7 +42,7 @@ export const useBlogStore = defineStore('blog', () => {
             const data = res.data.data;
 
             if (data?.data?.length) {
-                blogs.value.push(...data.data);
+                projects.value.push(...data.data);
                 nextCursor.value = data.next_cursor;
                 hasMore.value = !!data.next_cursor;
             } else {
@@ -57,11 +57,11 @@ export const useBlogStore = defineStore('blog', () => {
     };
 
     return {
-        blogs,
+        projects,
         nextCursor,
-        loading, isLoadingBlogPage, blog,
+        loading, isLoadingProjectPage, project,
         hasMore,
-        fetchBlogs,
-        fetchBlogBySlug
+        fetchProjects,
+        fetchProjectBySlug
     };
 });

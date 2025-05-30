@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('title');
             $table->string('background_color');
-            $table->string('about');
+            $table->text('about');
             $table->string('image1');
             $table->string('image2');
             $table->string('image3');
