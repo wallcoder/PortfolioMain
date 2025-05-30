@@ -10,51 +10,23 @@ import Button from '@/components/Button.vue'
 import ButtonExt from '@/components/ButtonExt.vue'
 import Loader from '@/components/Loader.vue'
 import BlogCard from '@/components/BlogCard.vue'
+import { useBlogStore } from '@/stores/blog';
 const { isLoading } = storeToRefs(useLoaderStore())
 const anim = useAnimationStore()
 const { targetEls, initialValue, initialValueImg, visibleOnceValue, visibleOnceValueImg } = storeToRefs(anim)
 const theme = useThemeStore()
-const { isDark } = storeToRefs(theme)
-const { toggleDark } = theme;
-const works = ref([
-    {
-        id: 1,
-        title: 'GymPass',
-        description: 'A gym listing app made for gym-owners and gym enthusiasts that enables membership booking.',
-        logo: '/logo.svg',
-        image: '/ex.png',
-        demo: '',
-        source: ''
-
-    },
-    {
-        id: 2,
-        title: 'GymPass',
-        description: 'A gym listing app made for gym-owners and gym enthusiasts that enables membership booking.',
-        logo: '/logo.svg',
-        image: '/yo.png',
-        demo: '',
-        source: ''
-
-    },
-    {
-        id: 2,
-        title: 'GymPass',
-        description: 'A gym listing app made for gym-owners and gym enthusiasts that enables membership booking.',
-        logo: '/logo.svg',
-        image: '/yo.png',
-        demo: '',
-        source: ''
-
-    }
-])
+const { blogs, nextCursor, loading, hasMore, } = storeToRefs(useBlogStore());
+const { fetchBlogs } = useBlogStore()
 
 onMounted(() => {
-    isLoading.value = true
+    
+    if (blogs.value.length === 0) {
+        nextCursor.value = null
+        hasMore.value = true
+        fetchBlogs(6)
+    }
 
-    setTimeout(() => {
-        isLoading.value = false
-    }, 1000)
+  
 })
 
 
@@ -62,12 +34,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class=" flex  flex-col  projects" id="works">
+    <section class=" flex  flex-col  blogs" id="works">
+       
         <div class="flex justify-between items-center px-[8%]">
             <h2 class="text-xl text-grey-light  font-semibold py-2" v-motion :initial="initialValue"
                 :visibleOnce="visibleOnceValue">
                 Recent Blogs
             </h2>
+            
             <RouterLink to="/blogs" class="text-grey-light text-sm font-semibold cursor-pointer hover:text-white ">VIEW
                 MORE <i class="fa-solid fa-arrow-right"></i></RouterLink>
         </div>
@@ -76,14 +50,16 @@ onMounted(() => {
         </div>
 
 
-
+         <div v-if="blogs.length === 0 && !loading" class="md:px-[8%] px-[6%] text-xl text-grey-light py-2">
+            No Blog Available
+        </div>
         <!-- Works Card -->
         <section class="md:px-[8%] px-[6%]" v-else>
 
 
 
             
-                <BlogCard />
+                <BlogCard :item="blogs"/>
                 
 
 

@@ -205,9 +205,9 @@ onUnmounted(() => {
                                     <a :href="`mailto:${email}`"
                                         class="py-2 hover:text-white  w-full flex gap-2 items-center group pl-[20px] hover:bg-grey-dark hover:pl-[24px]"
                                         @click="isOpen = false"><i class="bx bx-link text-xl"></i> <span>Connect</span></a>
-                                    <a href="/resume.pdf" download
+                                    <!-- <a href="/resume.pdf" download
                                         class="py-2 hover:text-white  w-full flex gap-2 items-center group pl-[20px] hover:bg-grey-dark hover:pl-[24px]"><i
-                                            class="bx bx-bulb text-xl"></i> <span>Download CV</span></a>
+                                            class="bx bx-bulb text-xl"></i> <span>Download CV</span></a> -->
                                 </nav>
                             </div>
                         </div>

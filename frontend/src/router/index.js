@@ -11,6 +11,7 @@ import AdminCreateBlog from '@/views/AdminCreateBlog.vue'
 import AdminEditBlog from '@/views/AdminBlogEdit.vue'
 import Login from '@/views/Login.vue'
 import NotFound from '@/views/NotFound.vue'
+import ServerError from '@/views/ServerError.vue'
 import SiteMaintain from '@/views/SiteMaintain.vue'
 import Projects from '@/views/Projects.vue'
 import About from '@/views/About.vue'
@@ -104,6 +105,9 @@ const router = createRouter({
       meta: { requiresCheck: true }
 
     },
+    { path: "/404", component: NotFound},
+    { path: "/500", component: ServerError},
+    
     { path: "/:pathMatch(.*)*", component: NotFound }, // Catch-all 404 route
 
 
@@ -140,7 +144,7 @@ router.beforeEach((to, from, next) => {
   
 
   if (!site.siteMaintain && to.path == '/maintenance') {
-    return next('/notfound')
+    return next('/')
   }
 
   next();
