@@ -58,7 +58,7 @@ onUnmounted(() => {
     <div>
         <div class="fixed w-full top-0 left-0 z-30" :class="[
             isNavbarVisible ? 'translate-y-0' : '-translate-y-full',
-            scrollY < 400
+            scrollY < 400 && $route.name !== 'blog-page' && $route.name !== 'project-page'
                 ? 'bg-transparent '
                 : 'bg-bg-dm/85 backdrop-blur-xl'
         ]">
@@ -73,7 +73,7 @@ onUnmounted(() => {
                             @click="toggleIsOpen()"></i>
                     </div>
 
-                    <RouterLink to="/" v-if="scrollY > 400" class=" text-[1.3rem] hidden md:block">biaka<span
+                    <RouterLink to="/" v-if="scrollY > 400 || ($route.name == 'blog-page' || $route.name == 'project-page')" class=" text-[1.3rem] hidden md:block">biaka<span
                             class=" text-gray-300">dev</span>
                     </RouterLink>
 
